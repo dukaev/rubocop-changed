@@ -1,0 +1,27 @@
+require: rubocop-rspec
+
+AllCops:
+  NewCops: enable
+  TargetRubyVersion: 2.7
+
+Naming/FileName:
+  Exclude:
+    - 'lib/rubocop-changed.rb'
+
+Metrics/BlockLength:
+  Exclude:
+    - 'spec'
+Gemspec/RequiredRubyVersion:
+  Enabled: false 
+
+RSpec/NamedSubject:
+  Enabled: false
+
+RSpec/MessageSpies:
+  Enabled: false 
+
+RSpec/MultipleExpectations:
+  Enabled: false 
+
+Style/ClassAndModuleChildren:
+  Enabled: false 
