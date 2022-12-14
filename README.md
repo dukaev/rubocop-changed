@@ -4,6 +4,8 @@ Reduce RuboCop's CI time.
 
 RuboCop extensions for lint only changed files in CI.
 
+**Git is required** to work and assumes that the **.git folder** exists.
+
 ## Installation
 
 Add gem to your `Gemfile`
@@ -33,6 +35,15 @@ By default, we use a branch returned from:
 git symbolic-ref refs/remotes/origin/HEAD
 ```
 For the custom branch set `RUBOCOP_CHANGED_BRANCH_NAME`. 
+
+## Similar Gems
+
+- [diffcop](https://github.com/yohira0616/diffcop)
+- [rubocop-changes](https://github.com/fcsonline/rubocop-changes)
+- [rubocop-git](https://github.com/m4i/rubocop-git)
+
+The difference is the current extension didn't try to wrap RuboCop.
+Instead, it just patched a small part of the code, which allows you to use `$ rubocop` as before.
 
 ## Contributing
 
