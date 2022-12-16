@@ -9,7 +9,7 @@ RuboCop extensions for lint only changed files in CI.
 ## Installation
 
 Add gem to your `Gemfile`
-```
+```ruby
 gem 'rubocop-changed'
 ```
 
@@ -19,22 +19,22 @@ gem 'rubocop-changed'
 
 Add to your `.rubocop_for_ci.yml` (for use only on CI):
 
-```
+```ruby
 require: rubocop-changed
 ```
 
 Or add argument:
-```
+```bash
 rubocop --require rubocop-changed
 ```
 
 ## Additionally
 
-By default, we use a branch returned from:
+The default branch for comparing gets by: 
+```bash
+git symbolic-ref refs/remotes/origin/HEAD # usually it's main or master
 ```
-git symbolic-ref refs/remotes/origin/HEAD
-```
-For the custom branch set `RUBOCOP_CHANGED_BRANCH_NAME`. 
+For custom branch set env:  `RUBOCOP_CHANGED_BRANCH_NAME`
 
 ## Similar Gems
 
