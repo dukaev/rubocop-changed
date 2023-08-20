@@ -11,11 +11,16 @@ module RuboCop
       GIT_COMMANDS = {
         changed_files: 'git diff-tree -r --no-commit-id --name-status %<compared_branch>s %<current_branch>s',
         current_branch: 'git rev-parse --abbrev-ref HEAD',
-        default_branch: 'git symbolic-ref refs/remotes/origin/HEAD'
+        default_branch: 'git symbolic-ref refs/remotes/origin/HEAD',
+        new_files: 'git status --porcelain=v1'
       }.freeze
 
       class << self
         def changed_files(branch = compared_branch)
+          (diffed_files(branch) + new_files).uniq
+        end
+
+        def diffed_files(branch = compared_branch)
           command = format(
             GIT_COMMANDS.fetch(:changed_files),
             compared_branch: branch,
@@ -32,6 +37,12 @@ module RuboCop
           raise ArgumentError, 'You can not compare branch with itself' if branch == current_branch
 
           branch
+        end
+
+        def new_files
+          command = format(GIT_COMMANDS.fetch(:new_files))
+          run(command).split("\n")
+                      .map { |file| File.absolute_path(file[3..]) }
         end
 
         private
