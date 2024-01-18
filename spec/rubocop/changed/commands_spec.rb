@@ -10,6 +10,7 @@ describe RuboCop::Changed::Commands do
       compared_branch: default_branch,
       current_branch: current_branch
     )
+    allow(ENV).to receive(:fetch).with('RUBOCOP_CHANGED_VERBOSE_LOGGING', false).and_return(false)
     allow(described_class).to(receive(:shell).with(changed_files_command).and_return(files.join("\n")))
     allow(described_class).to(receive(:shell).with(git[:new_files]).and_return(''))
     allow(described_class).to(receive(:shell).with(git[:current_branch]).and_return(current_branch))
