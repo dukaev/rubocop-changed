@@ -62,7 +62,7 @@ module RuboCop
 
         def run(cmd)
           output = shell(cmd)
-          raise Rubocop::Changed::ExecutionError.new(output, cmd) if output.match?(Regexp.union(ERRORS))
+          raise CommandError.new(output, cmd) if output.match?(Regexp.union(ERRORS))
 
           output
         end
