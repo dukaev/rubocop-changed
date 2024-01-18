@@ -6,23 +6,30 @@ module RuboCop
     class CommandError < StandardError
       ISSUE_URL = 'https://github.com/dukaev/rubocop-changed/issues'
       MESSAGES = {
-        'git: not found' => 'Git is not installed. Make shure that container has git installed',
-        'fatal: not a git repository' => 'Not found .git directory. Make shure that branch is copied',
-        'fatal: ambiguous argument' => 'Not found setted branch. Make shure that branch is downladed.'
+        'git: not found' =>
+          'The git binary is not available in the PATH. You may need to install git or update the PATH variable to ' \
+          'include the installation directory.',
+        'fatal: not a git repository' =>
+          'The .git directory was not found. Rubocop-changed only works with projects in a git repository.',
+        'fatal: ambiguous argument' =>
+          'The set branch was not found. Ensure that the branch has a local tracking branch or specify the full ' \
+          'reference in the RUBOCOP_CHANGED_BRANCH_NAME environment variable.'
       }.freeze
 
       def initialize(output, cmd)
         key = MESSAGES.keys.find { |error| output.include?(error) }
-        msg = MESSAGES[key] || default_message(cmd, output)
-
-        super(msg)
+        message = MESSAGES[key] || "Unknown error. Please, create issue on #{ISSUE_URL}."
+        super(exception_message(cmd, output, message))
       end
 
-      def default_message(cmd, output)
+      def exception_message(cmd, output, message)
         <<~HEREDOC
-          Unknown error. Please, create issue on #{ISSUE_URL}.
-          Command: #{cmd}
-          Message: #{output}
+          #{message}
+          Command:
+          #{cmd}
+          Output:
+          #{output}
+
         HEREDOC
       end
     end
