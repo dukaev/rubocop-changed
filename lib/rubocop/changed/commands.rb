@@ -61,14 +61,20 @@ module RuboCop
         end
 
         def run(cmd)
+          warn("COMMAND: #{cmd}") if verbose_logging?
           output = shell(cmd)
-          raise Rubocop::Changed::ExecutionError.new(output, cmd) if output.match?(Regexp.union(ERRORS))
+          warn("OUTPUT:  #{output}\n") if verbose_logging?
+          raise CommandError.new(output, cmd) if output.match?(Regexp.union(ERRORS))
 
           output
         end
 
         def shell(cmd)
           `#{cmd} 2>&1`
+        end
+
+        def verbose_logging?
+          ENV.fetch('RUBOCOP_CHANGED_VERBOSE_LOGGING', false) != false
         end
       end
     end

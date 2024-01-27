@@ -18,6 +18,5 @@ Gem::Specification.new do |spec|
 
   spec.files = Dir['lib/**/*.rb']
 
-  spec.add_development_dependency('rspec', '~> 3.12.0')
   spec.add_runtime_dependency('rubocop', '>= 1.0.0')
 end
