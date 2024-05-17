@@ -32,12 +32,13 @@ rubocop --require rubocop-changed
 
 The default branch for comparing gets by:
 ```bash
-git symbolic-ref refs/remotes/origin/HEAD # usually it's main or master
+git remote show origin | sed -n '/HEAD branch/s/.*: //p' | xargs # usually it's main or master
 ```
 For custom branch set env:  `RUBOCOP_CHANGED_BRANCH_NAME`
 
 ## Thanks
 - [Steve Hall](https://github.com/sh41)
+- [Marcin Kalita](https://github.com/rubyconvict)
 
 ## Similar Gems
 

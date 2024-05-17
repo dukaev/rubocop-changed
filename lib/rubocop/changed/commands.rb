@@ -11,7 +11,7 @@ module RuboCop
       GIT_COMMANDS = {
         changed_files: 'git diff-tree -r --no-commit-id --name-status %<compared_branch>s %<current_branch>s',
         current_branch: 'git rev-parse --abbrev-ref HEAD',
-        default_branch: 'git symbolic-ref refs/remotes/origin/HEAD',
+        default_branch: "git remote show origin | sed -n '/HEAD branch/s/.*: //p' | xargs",
         new_files: 'git status --porcelain=v1'
       }.freeze
 

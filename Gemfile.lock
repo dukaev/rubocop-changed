@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    rubocop-changed (0.0.2)
+    rubocop-changed (0.0.4)
       rubocop (>= 1.0.0)
 
 GEM
@@ -13,6 +13,7 @@ GEM
     parallel (1.22.1)
     parser (3.1.3.0)
       ast (~> 2.4.1)
+    racc (1.7.3)
     rainbow (3.1.1)
     regexp_parser (2.6.1)
     rexml (3.2.5)
@@ -48,12 +49,14 @@ GEM
 
 PLATFORMS
   arm64-darwin-22
+  ruby
   x86_64-darwin-19
 
 DEPENDENCIES
+  racc
   rspec
   rubocop-changed!
   rubocop-rspec
 
 BUNDLED WITH
-   2.3.3
+   2.5.9
