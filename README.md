@@ -38,6 +38,7 @@ For custom branch set env:  `RUBOCOP_CHANGED_BRANCH_NAME`
 
 ## Thanks
 - [Steve Hall](https://github.com/sh41)
+- [Marcin Kalita](https://github.com/rubyconvict)
 
 ## Similar Gems
 
